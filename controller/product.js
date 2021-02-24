@@ -14,7 +14,7 @@ router.get('/insertProductInfo', async (ctx) => {
             console.log(value);
             let product = new Product(value);
             // 随机生成类型 范围是1~8
-            product.type = Math.floor(Math.random() * 8) + 1;
+            // product.type = Math.floor(Math.random() * 8) + 1;
             product.save().then(() => {
                 count++;
                 console.log('成功' + count);
@@ -26,9 +26,9 @@ router.get('/insertProductInfo', async (ctx) => {
     ctx.body = '导入数据';
 });
 
-router.get('/getProductsByType', async (ctx) => {
+router.get('/getProductList', async (ctx) => {
     const Product = mongoose.model('Product');
-    await Product.find({ type: ctx.query.typeId }).skip(parseInt(ctx.query.start)).limit(parseInt(ctx.query.limit)).exec().then(res => {
+    await Product.find({ "attr.region": ctx.query.region }).skip(parseInt(ctx.query.start)).limit(parseInt(ctx.query.limit)).exec().then(res => {
         ctx.body = res;
     })
 });

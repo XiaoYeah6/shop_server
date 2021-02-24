@@ -3,12 +3,15 @@ const Schema = mongoose.Schema;
 
 const productSchema = new Schema({
     id: Schema.Types.ObjectId,
-    name: String,
+    title: String,
     img: String,
     price: Number,
-    company: String,
-    city: String,
-    type: Number
+    attr: {
+        region: String,
+        publish: String,
+        writer: String
+    }
+    
 });
 
 mongoose.model('Product', productSchema);
